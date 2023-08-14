@@ -1,5 +1,11 @@
 <script>
+	import PageTitle from "@/global-components/ui/PageTitle.svelte";
+
 	export let data
 </script>
 
-<h1>ini halaman {data.params.slug}</h1>
+<PageTitle>
+	Nested Page
+</PageTitle>
+
+<p>this is {data.slug}</p>

@@ -1,7 +1,14 @@
-<div class="container px-6 mx-auto grid">
-	<h2
-		class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
-	>
-		Blank
-	</h2>
-</div>
+<script>
+	import PageTitle from "@/global-components/ui/PageTitle.svelte";
+</script>
+
+<PageTitle>
+	Dashboard
+</PageTitle>
+
+<p>
+	Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+	Quo magnam eligendi repellendus.
+	Praesentium numquam iure omnis pariatur placeat aliquid accusamus
+	molestiae blanditiis aliquam sunt eveniet voluptatibus, modi saepe adipisci delectus!
+</p>

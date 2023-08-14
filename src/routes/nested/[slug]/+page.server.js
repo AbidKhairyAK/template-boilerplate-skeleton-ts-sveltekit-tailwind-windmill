@@ -1,3 +1,3 @@
 export function load ({ params }) {
-	return { params }
+	return { slug: params.slug }
 }
