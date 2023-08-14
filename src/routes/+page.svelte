@@ -1,5 +1,5 @@
 <script>
-	import PageTitle from "@/global-components/ui/PageTitle.svelte";
+	import PageTitle from "$components/ui/PageTitle.svelte";
 </script>
 
 <PageTitle>

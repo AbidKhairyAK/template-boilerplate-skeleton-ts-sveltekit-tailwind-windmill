@@ -1,8 +1,9 @@
 <script>
     import { fade, fly } from "svelte/transition";
-    import { afterNavigate } from "$app/navigation";
 
-	import { clickOutside } from "@/lib/clickOutside.js";
+    import { afterNavigate } from "$app/navigation";
+	import { clickOutside } from "$lib/clickOutside.js";
+
 	import SidebarMenu from "./SidebarMenu.svelte"
 
 	export let closeSideMenu

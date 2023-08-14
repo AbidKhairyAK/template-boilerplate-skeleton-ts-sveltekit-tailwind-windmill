@@ -1,5 +1,5 @@
 <script>
-	import { clickOutside } from "@/lib/clickOutside.js"
+	import { clickOutside } from "$lib/clickOutside.js"
 
 	export let toggleSideMenu
 
