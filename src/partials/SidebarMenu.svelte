@@ -3,8 +3,10 @@
 	import { ChevronDown } from "lucide-svelte";
 
 	import { page } from "$app/stores";
+	import { send, receive } from '$lib/transition.js'
 
 	import sidebarMenuList from "./sidebar-menu-list.js";
+    import { onMount } from "svelte";
 
 	let openMenus = [];
 
@@ -16,16 +18,39 @@
 			openMenus = [...openMenus, menu.title];
 		}
 	}
+
+	onMount(() => {
+		for (const menu of sidebarMenuList) {
+			if (menu.hasOwnProperty('childrens')) {
+				for (const submenu of menu.childrens) {
+					if (submenu.path === $page.url.pathname) {
+						openMenus = [...openMenus, menu.title]
+					}
+				}
+			}
+		}
+	})
 </script>
 
 <ul class="mt-6">
 	{#each sidebarMenuList as menu (menu.title)}
 		<li class="relative px-6 py-3">
 			{#if menu.hasOwnProperty("childrens")}
+				{#if menu.childrens.some(submenu => submenu.path === $page.url.pathname)}
+					<span
+						in:receive={{ key: 'active' }}
+						out:send={{ key: 'active' }}
+						class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+						aria-hidden="true"
+					></span>
+				{/if}
 				<button
 					on:click={() => toggleMenu(menu)}
 					aria-haspopup="true"
-					class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+					class={`
+						${menu.childrens.some(submenu => submenu.path === $page.url.pathname) && 'text-gray-800 dark:text-gray-100'}
+						inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200
+					`}
 				>
 					<span class="inline-flex items-center">
 						<svelte:component
@@ -49,7 +74,10 @@
 						{#each menu.childrens as submenu (submenu.title)}
 							<li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 								<a
-									class="w-full inline-flex items-center"
+									class={`
+										${submenu.path === $page.url.pathname && 'text-gray-800 dark:text-gray-100'}
+										w-full inline-flex items-center
+									`}
 									href={submenu.path}
 								>
 									<svelte:component
@@ -67,12 +95,17 @@
 			{:else}
 				{#if menu.path === $page.url.pathname}
 					<span
+						in:receive={{ key: 'active' }}
+						out:send={{ key: 'active' }}
 						class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
 						aria-hidden="true"
 					></span>
 				{/if}
 				<a
-					class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+					class={`
+						${menu.path === $page.url.pathname && 'text-gray-800 dark:text-gray-100'}
+						inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200
+					`}
 					href={menu.path}
 				>
 					<svelte:component
@@ -86,12 +119,3 @@
 		</li>
 	{/each}
 </ul>
-
-<!-- Active items have the snippet below -->
-<!-- <span
-class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-aria-hidden="true"
-></span> -->
-
-<!-- Add this classes to an active anchor (a tag) -->
-<!-- text-gray-800 dark:text-gray-100 -->

@@ -9,10 +9,11 @@ const config = {
 
 	kit: {
 		alias: {
-			$components: "src/lib/components",
-			"$components/*": "src/lib/components/*",
-			$partials: "src/lib/partials",
-			"$partials/*": "src/lib/partials/*",
+			"@/*": "src/*",
+			$components: "src/components",
+			"$components/*": "src/components/*",
+			$partials: "src/partials",
+			"$partials/*": "src/partials/*",
 		},
 		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
 		// If your environment is not supported or you settled on a specific environment, switch out the adapter.

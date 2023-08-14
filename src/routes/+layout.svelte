@@ -5,7 +5,7 @@
 	import SidebarModeMobile from "$partials/SidebarModeMobile.svelte";
 	import Header from "$partials/Header.svelte";
 
-	import "./app.css";
+	import "@/app.css";
 
 	export let data
 
