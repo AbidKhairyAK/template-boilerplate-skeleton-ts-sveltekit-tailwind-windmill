@@ -1,18 +1,19 @@
 <script>
-  import { ChevronDown } from "lucide-svelte";
+	import { ChevronDown } from "lucide-svelte";
+	import { slide } from "svelte/transition";
 
-  import sidebarMenuList from "./sidebar-menu-list.js";
+	import sidebarMenuList from "./sidebar-menu-list.js";
 
-  let openMenus = []
+	let openMenus = [];
 
-  function toggleMenu (menu) {
-    const isOpened = openMenus.includes(menu.title)
-    if (isOpened) {
-      openMenus = openMenus.filter(open => open !== menu.title)
-    } else {
-      openMenus = [...openMenus, menu.title]
-    }
-  }
+	function toggleMenu(menu) {
+		const isOpened = openMenus.includes(menu.title);
+		if (isOpened) {
+			openMenus = openMenus.filter((open) => open !== menu.title);
+		} else {
+			openMenus = [...openMenus, menu.title];
+		}
+	}
 </script>
 
 <ul class="mt-6">
@@ -39,14 +40,16 @@
 
 				{#if openMenus.includes(menu.title)}
 					<ul
-						class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+						transition:slide={{ duration: 200 }}
 						aria-label="submenu"
+						class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
 					>
 						{#each menu.childrens as submenu (submenu.title)}
-							<li
-								class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-							>
-								<a class="w-full inline-flex items-center" href={submenu.path}>
+							<li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+								<a
+									class="w-full inline-flex items-center"
+									href={submenu.path}
+								>
 									<svelte:component
 										this={submenu.icon}
 										size={18}

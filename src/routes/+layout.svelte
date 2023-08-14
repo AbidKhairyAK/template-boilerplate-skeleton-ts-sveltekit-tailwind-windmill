@@ -1,9 +1,9 @@
 <script>
-  import SidebarModeDesktop from "@/partials/SidebarModeDesktop.svelte";
-  import SidebarModeMobile from "@/partials/SidebarModeMobile.svelte";
-  import Header from "@/partials/Header.svelte";
+	import SidebarModeDesktop from "@/partials/SidebarModeDesktop.svelte";
+	import SidebarModeMobile from "@/partials/SidebarModeMobile.svelte";
+	import Header from "@/partials/Header.svelte";
 
-  import "@/app.css";
+	import "@/app.css";
 
 	let isSideMenuOpen = false;
 	const toggleSideMenu = () => (isSideMenuOpen = !isSideMenuOpen);
